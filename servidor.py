@@ -2,6 +2,7 @@
 import asyncio
 from tcp import Servidor
 import re
+from ip import IP
 
 dados_residuais= b''
 apelidos_em_uso = {}
@@ -9,7 +10,6 @@ lista_de_canais = {}
 
 def validar_nome(nome):
     return re.match(br'^[a-zA-Z][a-zA-Z0-9_-]*$', nome) is not None
-
 
 def sair(conexao):
     global apelidos_em_uso
@@ -24,8 +24,7 @@ def sair(conexao):
             lista_de_canais[_canal].remove(conexao)
 	
     if conexao in apelidos_em_uso.keys():
-    	apelidos_em_uso.pop(conexao)
-
+      apelidos_em_uso.pop(conexao)
     conexao.fechar()
 
 
@@ -158,6 +157,7 @@ def conexao_aceita(conexao):
     print(conexao, 'nova conexão')
     conexao.registrar_recebedor(dados_recebidos)
 
-servidor = Servidor(6667)
+rede = IP()
+servidor = Servidor(rede, 6667)
 servidor.registrar_monitor_de_conexoes_aceitas(conexao_aceita)
 asyncio.get_event_loop().run_forever()

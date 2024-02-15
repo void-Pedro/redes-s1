@@ -16,6 +16,9 @@ def dados_recebidos(conexao, dados):
     if dados == b'':
         conexao.fechar()
     else:
+        if dados.startswith(b'PING'):
+            conexao.enviar(b'PONG' + dados.split(b' ',1)[1])
+        
         conexao.enviar(dados)   # envia de volta
 
 def conexao_aceita(conexao):
