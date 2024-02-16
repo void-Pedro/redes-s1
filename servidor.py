@@ -98,7 +98,7 @@ def dados_recebidos(conexao, dados):
 
         # JOIN
         if dados_separados[i].startswith(b'JOIN'):
-            canal = dados_separados[i].split(b'#')[1]
+            canal = dados_separados['i'].split(b'#')[1]
             canal = canal[:len(canal)-1]
             if validar_nome(canal):
                 lista_de_canais.setdefault(canal, [])
