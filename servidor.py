@@ -78,7 +78,6 @@ def dados_recebidos(conexao, dados):
 
         # PRIVMSG
         if dados_separados[i].startswith(b'PRIVMSG'):
-            remetente = apelidos_em_uso[conexao]
             destinatario = dados_separados[i].split(b' ')[1]
             mensagem = dados_separados[i].split(b':')[1]
 
